@@ -8,7 +8,7 @@ URL:          	http://www.openh264.org/
 Group:        	System/Libraries
 License:      	BSD
 Version:      	1.7.0
-Release:        1
+Release:        2
 Source0:	https://github.com/cisco/openh264/archive/v%{version}.tar.gz
 Source1:	openh264.rpmlintrc
 Source2:	https://github.com/mozilla/gmp-api/archive/master.zip
