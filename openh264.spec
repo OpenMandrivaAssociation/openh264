@@ -7,7 +7,7 @@ Summary:      	Open Source H.264 Codec
 URL:          	http://www.openh264.org/
 Group:        	System/Libraries
 License:      	BSD
-Version:      	1.8.0
+Version:	2.0.0
 Release:        1
 Source0:	https://github.com/cisco/openh264/archive/v%{version}.tar.gz
 Source1:	openh264.rpmlintrc
