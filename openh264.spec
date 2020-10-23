@@ -1,4 +1,4 @@
-%define major 4
+%define major 6
 %define libname	%mklibname openh264 %{major}
 %define devname	%mklibname -d openh264
 
@@ -7,11 +7,12 @@ Summary:      	Open Source H.264 Codec
 URL:          	http://www.openh264.org/
 Group:        	System/Libraries
 License:      	BSD
-Version:	2.0.0
+Version:	2.1.1
 Release:        1
 Source0:	https://github.com/cisco/openh264/archive/v%{version}.tar.gz
 Source1:	openh264.rpmlintrc
-Source2:	https://github.com/mozilla/gmp-api/archive/master.zip
+Source2:	https://github.com/mozilla/gmp-api/archive/master.tar.gz
+Patch0:		openh264-2.1.1-no-Lusrlib.patch
 BuildRequires: 	nasm git unzip
 
 %description
@@ -42,17 +43,10 @@ The mozilla-openh264 package contains a H.264 codec plugin for Mozilla
 browsers.
 
 %prep
-%setup -q
-
-#------------------------|
-# Api for mozilla plugin
-# Extract gmp-api archive
-unzip %{S:2}
-mv gmp-api-master gmp-api
-#------------------------|
+%autosetup -p1 -a 2
+ln -s gmp-api-master gmp-api
 
 %build
-
 # Update the makefile with our build options
 sed -i -e 's|^CFLAGS_OPT=.*$|CFLAGS_OPT=%{optflags}|' Makefile
 sed -i -e 's|^PREFIX=.*$|PREFIX=%{_prefix}|' Makefile
@@ -60,16 +54,13 @@ sed -i -e 's|^LIBDIR_NAME=.*$|LIBDIR_NAME=%{_lib}|' Makefile
 sed -i -e 's|^SHAREDLIB_DIR=.*$|SHAREDLIB_DIR=%{_libdir}|' Makefile
 sed -i -e '/^CFLAGS_OPT=/i LDFLAGS=%{ldflags}' Makefile
 
-%make CC=%{__cc} CXX=%{__cxx}
+%make_build CC=%{__cc} CXX=%{__cxx}
 
 # build mozilla plugin
-%make plugin CC=%{__cc} CXX=%{__cxx}
+%make_build plugin CC=%{__cc} CXX=%{__cxx}
 
 %install
-%makeinstall_std
-%ifarch x86_64 aarch64
-sed -i 's|${prefix}/lib|${prefix}/lib64|g' %{buildroot}/%{_libdir}/pkgconfig/openh264.pc
-%endif
+%make_install
 
 #--------------------------------------------|
 #Install mozilla plugin
@@ -107,7 +98,10 @@ rm %{buildroot}%{_libdir}/*.a
 %{_bindir}/h264dec
 
 %files -n %{libname}
-%{_libdir}/lib%{name}.so.*
+%{_libdir}/lib%{name}.so.%{major}*
+# This is wrong, but since upstream creates that link,
+# chances are some build systems rely on it...
+%{_libdir}/lib%{name}.so.%{version}
 
 %files -n %{devname}
 %doc README.md LICENSE CONTRIBUTORS
