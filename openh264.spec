@@ -1,42 +1,44 @@
 %define major 6
-%define libname	%mklibname openh264 %{major}
-%define devname	%mklibname -d openh264
+%define libname %mklibname openh264 %{major}
+%define devname %mklibname -d openh264
 
-Name:         	openh264
-Summary:      	Open Source H.264 Codec
-URL:          	http://www.openh264.org/
-Group:        	System/Libraries
-License:      	BSD
+Summary:	Open Source H.264 Codec
+Name:		openh264
 Version:	2.1.1
-Release:        1
-Source0:	https://github.com/cisco/openh264/archive/v%{version}.tar.gz
+Release:	1
+Group:		System/Libraries
+License:	BSD
+URL:		http://www.openh264.org/
+Source0:	https://github.com/cisco/openh264/archive/%{name}-%{version}.tar.gz
 Source1:	openh264.rpmlintrc
 Source2:	https://github.com/mozilla/gmp-api/archive/master.tar.gz
 Patch0:		openh264-2.1.1-no-Lusrlib.patch
-BuildRequires: 	nasm git unzip
+BuildRequires:	nasm
+BuildRequires:	git
+BuildRequires:	unzip
 
 %description
 OpenH264 is a codec library which supports H.264 encoding and decoding.
 It is suitable for use in real time applications such as WebRTC.
 
-%package -n	%{libname}
+%package -n %{libname}
 Summary:	Open Source H.264 Codec
 Group:		System/Libraries
 
-%description -n	%{libname}
+%description -n %{libname}
 OpenH264 is a codec library which supports H.264 encoding and decoding.
 It is suitable for use in real time applications such as WebRTC.
 
 %package -n %{devname}
-Summary: Development files for %{name}
-Requires: %{libname} = %{EVRD}
+Summary:	Development files for %{name}
+Requires:	%{libname} = %{EVRD}
 
 %description -n %{devname}
 Header files and libraries for the package %{name}.
 
-%package     -n mozilla-openh264
-Summary:        H.264 codec support for Mozilla browsers
-Requires:       %{libname} = %{EVRD}
+%package -n mozilla-openh264
+Summary:	H.264 codec support for Mozilla browsers
+Requires:	%{libname} = %{EVRD}
 
 %description -n mozilla-openh264
 The mozilla-openh264 package contains a H.264 codec plugin for Mozilla
