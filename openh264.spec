@@ -1,4 +1,4 @@
-%define major 6
+%define major 7
 %define libname %mklibname openh264 %{major}
 %define devname %mklibname -d openh264
 
@@ -100,7 +100,7 @@ rm %{buildroot}%{_libdir}/*.a
 %{_bindir}/h264dec
 
 %files -n %{libname}
-#{_libdir}/lib%{name}.so.%{major}*
+%{_libdir}/lib%{name}.so.%{major}*
 # This is wrong, but since upstream creates that link,
 # chances are some build systems rely on it...
 %{_libdir}/lib%{name}.so.%{version}
