@@ -100,7 +100,7 @@ rm %{buildroot}%{_libdir}/*.a
 %{_bindir}/h264dec
 
 %files -n %{libname}
-%{_libdir}/lib%{name}.so.%{major}*
+#{_libdir}/lib%{name}.so.%{major}*
 # This is wrong, but since upstream creates that link,
 # chances are some build systems rely on it...
 %{_libdir}/lib%{name}.so.%{version}
