@@ -14,7 +14,7 @@ License:	BSD
 URL:		https://www.openh264.org/
 Source0:	https://github.com/cisco/openh264/archive/%{name}-%{version}.tar.gz
 Source1:	openh264.rpmlintrc
-Source2:	https://github.com/mozilla/gmp-api/archive/%{commit}.tar.gz
+Source2:	https://github.com/mozilla/gmp-api/archive/gmp-api-%{commit}.tar.gz
 Patch0:		openh264-2.1.1-no-Lusrlib.patch
 BuildRequires:	nasm
 BuildRequires:	git
