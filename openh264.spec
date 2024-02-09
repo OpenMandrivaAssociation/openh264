@@ -1,5 +1,6 @@
 %define major 7
-%define libname %mklibname openh264 %{major}
+%define libname %mklibname openh264
+%define oldlibname %mklibname openh264 7
 %define devname %mklibname -d openh264
 
 # Submodule
@@ -27,6 +28,7 @@ It is suitable for use in real time applications such as WebRTC.
 %package -n %{libname}
 Summary:	Open Source H.264 Codec
 Group:		System/Libraries
+%rename %{oldlibname}
 
 %description -n %{libname}
 OpenH264 is a codec library which supports H.264 encoding and decoding.
