@@ -1,17 +1,21 @@
 %define major 7
-%define libname %mklibname openh264 %{major}
+%define libname %mklibname openh264
+%define oldlibname %mklibname openh264 7
 %define devname %mklibname -d openh264
+
+# Submodule
+%global commit e7d30b921df736a1121a0c8e0cf3ab1ce5b8a4b7
 
 Summary:	Open Source H.264 Codec
 Name:		openh264
-Version:	2.3.1
-Release:	2
+Version:	2.4.1
+Release:	1
 Group:		System/Libraries
 License:	BSD
-URL:		http://www.openh264.org/
+URL:		https://www.openh264.org/
 Source0:	https://github.com/cisco/openh264/archive/%{name}-%{version}.tar.gz
 Source1:	openh264.rpmlintrc
-Source2:	https://github.com/mozilla/gmp-api/archive/master.tar.gz
+Source2:	https://github.com/mozilla/gmp-api/archive/gmp-api-%{commit}.tar.gz
 Patch0:		openh264-2.1.1-no-Lusrlib.patch
 BuildRequires:	nasm
 BuildRequires:	git
@@ -24,6 +28,7 @@ It is suitable for use in real time applications such as WebRTC.
 %package -n %{libname}
 Summary:	Open Source H.264 Codec
 Group:		System/Libraries
+%rename %{oldlibname}
 
 %description -n %{libname}
 OpenH264 is a codec library which supports H.264 encoding and decoding.
@@ -46,7 +51,7 @@ browsers.
 
 %prep
 %autosetup -p1 -a 2
-ln -s gmp-api-master gmp-api
+ln -s gmp-api-%{commit} gmp-api
 
 %build
 # Update the makefile with our build options
