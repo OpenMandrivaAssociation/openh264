@@ -3,7 +3,7 @@
 %define devname %mklibname -d openh264
 
 # Submodule
-%global commit1 e7d30b921df736a1121a0c8e0cf3ab1ce5b8a4b7
+%global commit e7d30b921df736a1121a0c8e0cf3ab1ce5b8a4b7
 
 Summary:	Open Source H.264 Codec
 Name:		openh264
