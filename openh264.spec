@@ -8,7 +8,7 @@
 
 Summary:	Open Source H.264 Codec
 Name:		openh264
-Version:	2.4.1
+Version:	2.5.0
 Release:	1
 Group:		System/Libraries
 License:	BSD
