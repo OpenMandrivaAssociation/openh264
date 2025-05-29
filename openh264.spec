@@ -74,7 +74,7 @@ sed -i -e '/^CFLAGS_OPT=/i LDFLAGS=%{ldflags}' Makefile
 #Install mozilla plugin
 install -dm 755 %{buildroot}%{_libdir}/mozilla/plugins/gmp-gmpopenh264/system-installed
 ln -s %{_bindir}/h264enc %{buildroot}%{_libdir}/mozilla/plugins/gmp-gmpopenh264/system-installed/h264enc
-cp -a libgmpopenh264.so* gmpopenh264.info %{buildroot}%{_libdir}/mozilla/plugins/gmp-gmpopenh264/system-installed/
+#cp -a libgmpopenh264.so* gmpopenh264.info %{buildroot}%{_libdir}/mozilla/plugins/gmp-gmpopenh264/system-installed/
 
 # cofiguration for mozilla plugin
 install -dm 755 %{buildroot}%{_libdir}/firefox/defaults/pref
