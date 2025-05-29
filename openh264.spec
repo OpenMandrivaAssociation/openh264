@@ -1,4 +1,4 @@
-%define major 7
+%define major 8
 %define libname %mklibname openh264
 %define oldlibname %mklibname openh264 7
 %define devname %mklibname -d openh264
@@ -15,7 +15,7 @@ License:	BSD
 URL:		https://www.openh264.org/
 Source0:	https://github.com/cisco/openh264/archive/%{name}-%{version}.tar.gz
 Source1:	openh264.rpmlintrc
-Source2:	https://github.com/mozilla/gmp-api/archive/gmp-api-%{commit}.tar.gz
+#Source2:	https://github.com/mozilla/gmp-api/archive/gmp-api-%{commit}.tar.gz
 Patch0:		openh264-2.1.1-no-Lusrlib.patch
 BuildRequires:	nasm
 BuildRequires:	git
@@ -50,8 +50,9 @@ The mozilla-openh264 package contains a H.264 codec plugin for Mozilla
 browsers.
 
 %prep
-%autosetup -p1 -a 2
-ln -s gmp-api-%{commit} gmp-api
+%autosetup -p1 
+#-a 2
+#ln -s gmp-api-%{commit} gmp-api
 
 %build
 # Update the makefile with our build options
@@ -73,7 +74,7 @@ sed -i -e '/^CFLAGS_OPT=/i LDFLAGS=%{ldflags}' Makefile
 #Install mozilla plugin
 install -dm 755 %{buildroot}%{_libdir}/mozilla/plugins/gmp-gmpopenh264/system-installed
 ln -s %{_bindir}/h264enc %{buildroot}%{_libdir}/mozilla/plugins/gmp-gmpopenh264/system-installed/h264enc
-cp -a libgmpopenh264.so* gmpopenh264.info %{buildroot}%{_libdir}/mozilla/plugins/gmp-gmpopenh264/system-installed/
+#cp -a libgmpopenh264.so* gmpopenh264.info %{buildroot}%{_libdir}/mozilla/plugins/gmp-gmpopenh264/system-installed/
 
 # cofiguration for mozilla plugin
 install -dm 755 %{buildroot}%{_libdir}/firefox/defaults/pref
