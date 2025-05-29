@@ -1,4 +1,4 @@
-%define major 7
+%define major 8
 %define libname %mklibname openh264
 %define oldlibname %mklibname openh264 7
 %define devname %mklibname -d openh264
